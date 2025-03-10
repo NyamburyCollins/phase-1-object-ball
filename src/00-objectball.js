@@ -258,6 +258,43 @@ function winningTeam() {
         for (let player in game[team].players){
             totalPoints += game[team].players[player].points;
         }
-        teamPoints[game[team].teamName] = totalPoints[a] > teamPoints[b] ? a:b
+        teamPoints[game[team].teamName] = totalPoints;
     }
+    return Object.keys(teamPoints).reduce((a,b) => (teamPoints[a] > teamPoints[b] ? a:b ))
 }
+console.log('winning team:', winningTeam());
+
+//Step 12 playerwithLongestName
+
+function playerwithLongestName(){
+    let game = gameObject();
+    let LongestName ='';
+    for(let team in game) {
+        for(let player in game[team].players){
+            if (player.length > LongestName.length) {
+                LongestName = player;
+            }
+        }
+    }
+    return LongestName;
+}
+console.log('Player with Longest name:', playerwithLongestName());
+
+//Step 13
+function doesLongNameStealAton() {
+    let game = gameObject ();
+    let LongestName = playerwithLongestName();
+    let mostSteals = 0;
+    let topStealer ='';
+
+    for (let team in game) {
+        for (let player in game[team].players) {
+            if (game[team].players[player].Steals > mostSteals) {
+                mostSteals = game[team].players[player].Steals;
+                topStealer = player;
+            }
+        }
+    }
+    return LongestName === topStealer;
+}
+console.log("Does the Longest name player steal the most", doesLongNameStealAton());
